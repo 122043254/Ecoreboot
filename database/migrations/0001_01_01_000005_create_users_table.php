@@ -13,12 +13,22 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name'); // Cambia 'nombre' por 'name' para mantener consistencia con Laravel
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            // Campos adicionales
+            $table->string('telefono', 20)->nullable();
+            $table->enum('role', ['administrador', 'donante'])->default('donante'); // Agregado
+
+            $table->unsignedBigInteger('id_rol_usuario');
+
             $table->rememberToken();
             $table->timestamps();
+
+            // Clave foránea
+            $table->foreign('id_rol_usuario')->references('id_rol_usuario')->on('rol_usuarios')->onDelete('cascade');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
