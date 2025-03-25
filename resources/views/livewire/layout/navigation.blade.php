@@ -1,9 +1,11 @@
 <?php
 
+namespace App\Http\Livewire\Layout;
+
 use App\Livewire\Actions\Logout;
 use Livewire\Volt\Component;
 
-new class extends Component
+class Navigation extends Component
 {
     /**
      * Log the current user out of the application.
@@ -11,10 +13,19 @@ new class extends Component
     public function logout(Logout $logout): void
     {
         $logout();
-
         $this->redirect('/', navigate: true);
     }
-}; ?>
+
+    /**
+     * Render the component.
+     *
+     * @return mixed
+     */
+    public function render(): mixed
+    {
+        return view('livewire.layout.navigation');
+    }
+} ?>
 
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
@@ -33,6 +44,18 @@ new class extends Component
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('about')" wire:navigate>
+                        {{ __('Acerca de Nosotros') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('donar.informativo')" wire:navigate>
+                        {{ __('Donar Dispositivo') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('privacy')" wire:navigate>
+                        {{ __('Política de Privacidad') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('terms')" wire:navigate>
+                        {{ __('Términos y Condiciones') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -42,7 +65,6 @@ new class extends Component
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
-
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -55,8 +77,6 @@ new class extends Component
                         <x-dropdown-link :href="route('profile')" wire:navigate>
                             {{ __('Profile') }}
                         </x-dropdown-link>
-
-                        <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
                             <x-dropdown-link>
                                 {{ __('Log Out') }}
@@ -84,6 +104,18 @@ new class extends Component
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('about')" wire:navigate>
+                {{ __('Acerca de Nosotros') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('donar.informativo')" wire:navigate>
+                {{ __('Donar Dispositivo') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('privacy')" wire:navigate>
+                {{ __('Política de Privacidad') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('terms')" wire:navigate>
+                {{ __('Términos y Condiciones') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -97,8 +129,6 @@ new class extends Component
                 <x-responsive-nav-link :href="route('profile')" wire:navigate>
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
-
-                <!-- Authentication -->
                 <button wire:click="logout" class="w-full text-start">
                     <x-responsive-nav-link>
                         {{ __('Log Out') }}

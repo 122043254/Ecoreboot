@@ -4,7 +4,6 @@
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <!-- Imágenes de mejor resolución -->
             <img src="/images/recycle-background1.jpg" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="Reciclaje">
             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100 bg-dark bg-opacity-50">
                 <h2 class="fw-bold text-white">BIENVENIDO A ECOREBOOT</h2>
@@ -12,7 +11,6 @@
             </div>
         </div>
         <div class="carousel-item">
-            <!-- Imágenes de mejor resolución -->
             <img src="/images/recycle-background2.jpg" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="Reciclaje">
             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100 bg-dark bg-opacity-50">
                 <h2 class="fw-bold text-white">Reciclaje, reutilización y reparación</h2>
