@@ -1,25 +1,38 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Livewire\About; 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
+use App\Livewire\About as LivewireAbout;
 
+// Ruta principal
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-//Route::view('/about', 'about')->name('about');
-Route::get('/about', About::class)->name('about');
+// Rutas de About
+Route::get('/about', LivewireAbout::class)->name('about');
 
+Route::view('/donar', 'donar')->name('donar.informativo');
+
+// Rutas de información estática
 Route::view('/privacy', 'privacy')->name('privacy');
 Route::view('/terms', 'terms')->name('terms');
 
+// Rutas protegidas por autenticación
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::view('dashboard', 'dashboard')->name('dashboard');
-    Route::view('profile', 'profile')->name('profile');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 });
 
+// Rutas protegidas para administradores
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', \App\Livewire\Admin\Dashboard::class)->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 });
 
+Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+
+// Requiere las rutas de autenticación
 require __DIR__ . '/auth.php';

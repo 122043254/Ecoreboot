@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EstadoDispositivo extends Model
+class TipoElectrodomestico extends Model
 {
-    protected $table = 'estado_dispositivo'; // Nombre de la tabla
+    protected $table = 'tipo_electrodomestico'; // Nombre de la tabla
 
-    protected $primaryKey = 'id_estado_dispositivo'; // Clave primaria
+    protected $primaryKey = 'id_tipo_electrodomestico'; // Clave primaria
 
     public $incrementing = true; // Indica que la clave primaria es autoincremental
 

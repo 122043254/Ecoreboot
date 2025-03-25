@@ -2,25 +2,34 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\Models\RolUsuario;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        $rol = RolUsuario::first(); // Asumimos que ya existe un rol en la tabla
-
+        // Crear un usuario administrador
         User::create([
-            'name' => 'Juan Pérez',
-            'email' => 'juan@example.com',
-            'password' => bcrypt('password123'),
-            'id_rol_usuario' => $rol->id_rol_usuario, // Asigna el rol predeterminado
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('password123'), // Hashear la contraseña
+            'telefono' => '1234567890',
+            'role' => 'administrador', // Cambiado a un valor válido
+            'id_rol_usuario' => 1, // Asegúrate de que este ID exista en la tabla rol_usuarios
+            'email_verified_at' => now(), // Marca el correo como verificado
+        ]);
+
+        // Crear un usuario regular
+        User::create([
+            'name' => 'Regular User',
+            'email' => 'user@example.com',
+            'password' => Hash::make('password123'),
+            'telefono' => '0987654321',
+            'role' => 'donante', // Cambiado a un valor válido
+            'id_rol_usuario' => 2, // Asegúrate de que este ID exista en la tabla rol_usuarios
+            'email_verified_at' => now(),
         ]);
     }
 }
