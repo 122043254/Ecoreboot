@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\About as LivewireAbout;
+use App\Http\Controllers\Auth\LoginController;
 
 // Ruta principal
 Route::view('/', 'welcome')->name('home');
@@ -24,7 +25,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 // Ruta para cerrar sesión
-Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Requiere las rutas de autenticación
 require __DIR__ . '/auth.php';
