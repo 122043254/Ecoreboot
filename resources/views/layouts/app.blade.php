@@ -49,43 +49,67 @@
         footer .social-icons a:hover {
             color: #007bff;
         }
+
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-success" href="{{ route('home') }}">ECOREBOOT</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a href="{{ route('about') }}" class="nav-link">Acerca de Nosotros</a></li>
-                    <li class="nav-item">
-                        @auth
-                            <a class="nav-link" href="{{ route('donar') }}">Donar Dispositivo</a>
-                        @else
-                            <a class="nav-link" href="{{ route('login') }}" onclick="alert('Debes iniciar sesión o registrarte para donar un dispositivo.')">Donar Dispositivo</a>
-                        @endauth
-                    </li>
-                </ul>
-                <ul class="navbar-nav ms-3">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-success" href="{{ route('home') }}">ECOREBOOT</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a href="{{ route('about') }}" class="nav-link">Acerca de Nosotros</a></li>
+                <li class="nav-item">
                     @auth
-                        <li class="nav-item"><a class="nav-link" href="#">{{ Auth::user()->name }}</a></li>
-                        <li class="nav-item">
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button class="btn btn-link nav-link" type="submit">Cerrar Sesión</button>
-                            </form>
-                        </li>
+                        <a class="nav-link" href="{{ route('donar') }}">Donar Dispositivo</a>
                     @else
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Registrarse</a></li>
+                        <a class="nav-link" href="{{ route('login') }}" onclick="alert('Debes iniciar sesión o registrarte para donar un dispositivo.')">Donar Dispositivo</a>
                     @endauth
-                </ul>
-            </div>
+                </li>
+            </ul>
+
+            <!-- Menú de usuario -->
+            <ul class="navbar-nav ms-3">
+                @auth
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle fa-2x me-1"></i> {{-- Ícono de perfil --}}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            @if(Auth::user()->role === 'admin')  
+                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}"><i class="fas fa-cog"></i> Panel de Administración</a></li>
+                            @else
+                                <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="fas fa-user"></i> Editar Perfil</a></li>
+                                <li><a class="dropdown-item" href="{{ route('donar') }}"><i class="fas fa-gift"></i> Donar Dispositivo</a></li>
+                                <li><a class="dropdown-item" href="{{ route('donaciones.panel') }}"><i class="fas fa-list"></i> Panel de Donaciones</a></li>
+                            @endif
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="dropdown-item text-danger"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="guestDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle fa-2x me-1"></i> {{-- Ícono de perfil --}}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="guestDropdown">
+                            <li><a class="dropdown-item" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
+                            <li><a class="dropdown-item" href="{{ route('register') }}"><i class="fas fa-user-plus"></i> Registrarse</a></li>
+                        </ul>
+                    </li>
+                @endauth
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
     
     <main class="py-4">
         @yield('content')
@@ -125,7 +149,14 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+            dropdownElementList.map(function (dropdownToggleEl) {
+                return new bootstrap.Dropdown(dropdownToggleEl);
+            });
+        });
+    </script>
     @livewireScripts
 </body>
 </html>
