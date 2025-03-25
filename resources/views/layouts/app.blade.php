@@ -28,7 +28,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a href="{{ route('about') }}" class="nav-link">Acerca de Nosotros</a></li>
+                        <li class="nav-item"><a href="{{ route('about') }}" class="nav-link text-dark">Acerca de Nosotros</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('donar.informativo') }}">Donar Dispositivo</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('privacy') }}">Política de Privacidad</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('terms') }}">Términos y Condiciones</a></li>
