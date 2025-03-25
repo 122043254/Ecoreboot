@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -18,66 +18,67 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div class="min-h-screen">
         <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand fw-bold text-success" href="{{ route('home') }}">ECOREBOOT</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a href="{{ route('about') }}" class="nav-link text-dark">Acerca de Nosotros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('donar.informativo') }}">Donar Dispositivo</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('privacy') }}">Política de Privacidad</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('terms') }}">Términos y Condiciones</a></li>
-                    </ul>
-
-                    <ul class="navbar-nav ms-3">
-                        @auth
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-user-circle fa-2x me-1"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                    @if(Auth::user()->role === 'administrador')  
-                                        <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}"><i class="fas fa-cog"></i> Panel de Administración</a></li>
-                                    @else
-                                        <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fas fa-user"></i> Editar Perfil</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('donar') }}"><i class="fas fa-gift"></i> Donar Dispositivo</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('donaciones.panel') }}"><i class="fas fa-list"></i> Panel de Donaciones</a></li>
-                                    @endif
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li>
-                                        <form action="{{ route('logout') }}" method="POST">
-                                            @csrf
-                                            <button class="dropdown-item text-danger"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="guestDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-user-circle fa-2x me-1"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="guestDropdown">
-                                    <li><a class="dropdown-item" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('register') }}"><i class="fas fa-user-plus"></i> Registrarse</a></li>
-                                </ul>
-                            </li>
-                        @endauth
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-success" href="{{ route('home') }}">ECOREBOOT</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         
-        <main class="py-4">
+
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="{{ route('about') }}" class="nav-link text-dark">Acerca de Nosotros</a></li>
+                <li class="nav-item"><a href="{{ route('donar.informativo') }}" class="nav-link">Donar Dispositivo</a></li>
+                <li class="nav-item"><a href="{{ route('privacy') }}" class="nav-link">Política de Privacidad</a></li>
+                <li class="nav-item"><a href="{{ route('terms') }}" class="nav-link">Términos y Condiciones</a></li>
+            </ul>
+
+            <ul class="navbar-nav ms-3">
+                @auth
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle fa-2x me-1"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            @if(Auth::user()->role === 'administrador')  
+                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}"><i class="fas fa-cog"></i> Panel de Administración</a></li>
+                            @else
+                                <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fas fa-user"></i> Editar Perfil</a></li>
+                                <li><a class="dropdown-item" href="{{ route('donar') }}"><i class="fas fa-gift"></i> Donar Dispositivo</a></li>
+                                <li><a class="dropdown-item" href="{{ route('donaciones.panel') }}"><i class="fas fa-list"></i> Panel de Donaciones</a></li>
+                            @endif
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="dropdown-item text-danger"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('register') }}" class="nav-link text-black"><i class="fas fa-user-plus"></i> Registrarse</a>
+                    </li>
+                @endauth
+            </ul>
+        
+    </div>
+</nav>
+
+
+        
+        <main class="py-5 mt-5">
             @yield('content')
         </main>
         
-        <footer>
+        <footer class="bg-green-800 text-white py-4 mt-auto">
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-4 mb-3">
@@ -86,7 +87,7 @@
                         <p><strong>Email:</strong> contacto@ecoreboot.com</p>
                         <p><strong>Dirección:</strong> Calle Ficticia 123, Ciudad, Estado, País</p>
                     </div>
-                    <div class="col-12 col-md-4 mb-3">
+                    <div class="col-12 col-md-4 mb-3 text-center">
                         <h5>Síguenos</h5>
                         <a href="https://www.facebook.com/ECOREBOOT" target="_blank" class="text-white mx-2">
                             <i class="fab fa-facebook-f fa-2x"></i>
@@ -98,7 +99,7 @@
                             <i class="fab fa-instagram fa-2x"></i>
                         </a>
                     </div>
-                    <div class="col-12 col-md-4 mb-3">
+                    <div class="col-12 col-md-4 mb-3 text-end">
                         <h5>Información Legal</h5>
                         <p>
                             <a href="{{ route('privacy') }}" class="text-white">Política de privacidad</a> | 
