@@ -1,8 +1,11 @@
+@extends('layouts.app')
+
+@section('content')
 <div class="container my-5">
     <h1 class="text-center fw-bold">ACERCA DE NOSOTROS</h1>
 
-    <div class="row mt-4 align-items-center">
-        <div class="col-md-6">
+    <div class="row mt-4 align-items-center" style="text-align: center;">
+        <div class="col-md-4 mx-20">
             <p class="fs-5">
                 ¡Dale una segunda vida a tus dispositivos electrónicos! 
                 En <span class="fw-bold">Ecoreboot</span>, creemos en el poder del reciclaje, 
@@ -22,3 +25,4 @@
         </div>
     </div>
 </div>
+@endsection

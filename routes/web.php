@@ -8,7 +8,8 @@ use App\Http\Controllers\Auth\LoginController;
 Route::view('/', 'welcome')->name('home');
 
 // Rutas de información estática
-Route::view('/about', LivewireAbout::class)->name('about');
+//Route::view('/about', LivewireAbout::class)->name('about');
+Route::view('/about', 'livewire.about')->name('about');
 Route::view('/donar', 'donar')->name('donar.informativo');
 Route::view('/privacy', 'privacy')->name('privacy');
 Route::view('/terms', 'terms')->name('terms');
