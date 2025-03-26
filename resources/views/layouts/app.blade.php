@@ -47,7 +47,7 @@
                                 <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}"><i class="fas fa-cog"></i> Panel de Administración</a></li>
                             @else
                                 <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fas fa-user"></i> Editar Perfil</a></li>
-                                <li><a class="dropdown-item" href="{{ route('donar') }}"><i class="fas fa-gift"></i> Donar Dispositivo</a></li>
+                                <li><a class="dropdown-item" href="{{ route('donar.informativo') }}"><i class="fas fa-gift"></i> Donar Dispositivo</a></li>
                                 <li><a class="dropdown-item" href="{{ route('donaciones.panel') }}"><i class="fas fa-list"></i> Panel de Donaciones</a></li>
                             @endif
                             <li><hr class="dropdown-divider"></li>

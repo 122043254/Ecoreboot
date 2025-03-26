@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id('id_rol_usuario');
             $table->string('nombre', 100);
             $table->timestamps();
+
+            
         });
     }
 

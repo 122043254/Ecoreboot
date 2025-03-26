@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\RolUsuario; // Agrega este modelo para acceder a la tabla de roles
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,24 +15,45 @@ new #[Layout('layouts.guest')] class extends Component
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
+    public string $phone = ''; // Añadir el campo de teléfono
 
     /**
      * Handle an incoming registration request.
      */
     public function register(): void
     {
+        // Validar los datos del formulario
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            'phone' => ['required', 'string', 'max:15'], // Validar el teléfono
         ]);
 
+        // Hashear la contraseña
         $validated['password'] = Hash::make($validated['password']);
 
+        // Buscar el ID del rol "donante" en la tabla `rol_usuarios`
+        $rolDonante = RolUsuario::where('nombre', 'donante')->first();
+        
+        // Si el rol existe, asignar el id_rol_usuario
+        if ($rolDonante) {
+            $validated['id_rol_usuario'] = $rolDonante->id_rol_usuario;
+        } else {
+            // Si no existe, asignar un valor predeterminado (puedes manejar esto como desees)
+            $validated['id_rol_usuario'] = 2;  // Este valor depende de cómo tengas configurados los roles
+        }
+
+        // Agregar el teléfono a los datos validados
+        $validated['phone'] = $this->phone;
+
+        // Crear el usuario y disparar el evento de registro
         event(new Registered($user = User::create($validated)));
 
+        // Iniciar sesión automáticamente
         Auth::login($user);
 
+        // Redirigir al dashboard
         $this->redirect(route('dashboard', absolute: false), navigate: true);
     }
 }; ?>
