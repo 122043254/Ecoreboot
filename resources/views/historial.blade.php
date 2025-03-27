@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial de Dispositivos</title>
-    <!-- Estilos Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
-        /* Estilos personalizados para el historial de dispositivos */
-        body {
+            body {
             background-color: #f4f4f4;
         }
 
@@ -24,9 +22,15 @@
             text-align: center;
         }
 
+        .nav-tabs .nav-link {
+            background-color: transparent; 
+            color: #4CAF50; 
+            border-color: transparent; 
+        }
+
         .nav-tabs .nav-link.active {
-            background-color: #4CAF50;
-            color: white;
+            background-color: #4CAF50; 
+            color: white; 
         }
 
         .table {
@@ -47,6 +51,7 @@
             background-color: #ffffff;
         }
     </style>
+
 </head>
 <body>
 
@@ -108,7 +113,7 @@
                         <td>10/03/2025</td>
                         <td>Monitor LG 22"</td>
                         <td>Aprobado</td>
-                        <td>Para oficina en casa</td>
+                        <td>Uso escolar</td>
                     </tr>
                     <tr>
                         <td>05/02/2025</td>

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Perfil</title>
     <style>
-        /* Estilos generales */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -50,13 +49,13 @@
             padding: 10px;
             border-radius: 10px;
             border: none;
-            background: #D9F5D3; /* Verde claro */
+            background: #D9F5D3; 
             color: #333;
             font-size: 14px;
         }
 
         .btn {
-            background-color: #4CAF50; /* Verde oscuro */
+            background-color: #4CAF50; 
             color: white;
             padding: 12px;
             width: 100%;
