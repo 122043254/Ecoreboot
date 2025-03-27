@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\About as LivewireAbout;
 use App\Http\Controllers\Auth\LoginController;
+use App\Livewire\Admin\Dashboard;
+
 
 // Ruta principal
 Route::view('/', 'welcome')->name('home');
@@ -20,9 +22,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('profile', 'profile')->name('profile');
 
     // Rutas protegidas para administradores
-    Route::middleware(['admin'])->group(function () {
-        Route::view('/admin/dashboard', 'admin.dashboard')->name('admin.dashboard');
-    });
+    Route::get('/admin/dashboard', [Dashboard::class, 'render'])
+    ->middleware(['auth']) 
+    ->name('admin.dashboard');
 });
 
 // Ruta para cerrar sesión

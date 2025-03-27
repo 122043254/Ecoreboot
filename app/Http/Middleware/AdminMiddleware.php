@@ -10,10 +10,12 @@ class AdminMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role === 'admin') {
-            return $next($request);
+        dd('Middleware admin está funcionando'); // Verifica si se imprime el mensaje
+
+        if (!Auth::check() || Auth::user()->role !== 'administrador') {
+            abort(403, 'Acceso denegado.');
         }
 
-        return redirect('/')->with('error', 'Acceso denegado.');
+        return $next($request);
     }
 }
