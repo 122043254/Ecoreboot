@@ -30,3 +30,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Requiere las rutas de autenticación
 require __DIR__ . '/auth.php';
+
+Route::view('/editarperfil', 'editarperfil')->name('editarperfil');
+Route::view('/historial', 'historial')->name('historial');
