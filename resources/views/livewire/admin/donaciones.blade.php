@@ -32,7 +32,7 @@
                         <td>{{ $donacion->usuario->name ?? 'N/A' }}</td>
                         <td>{{ $donacion->fecha }}</td>
                         <td>{{ $donacion->total_dispositivos }}</td>
-                        <td>{{ $donacion->activo ? 'Activa' : 'Inactiva' }}</td>
+                        <td>{{ $donacion->activo ? 'Aceptado' : 'Rechazado' }}</td>
                         <td>
                         <button class="btn btn-sm btn-warning" wire:click="editarDonacion({{ $donacion->id_donacion }})">
                             Editar
