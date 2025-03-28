@@ -14,14 +14,14 @@ class Donacion extends Model
     public $incrementing = true; // Indica que la clave primaria es autoincremental
 
     protected $fillable = [
-        'id_usuario',
-        'id_tipo_electrodomestico',
-        'id_estado_dispositivo',
-        'fecha',
-        'imperfecciones',
+        'nombre',
+        'email',
         'telefono',
-        'total_dispositivos',
-        'activo',
+        'direccion',
+        'tipo_dispositivo',
+        'descripcion',
+        'estado',
+        'fecha_solicitud'
     ];
 
     public $timestamps = true; // Indica que se deben manejar los timestamps (created_at y updated_at)

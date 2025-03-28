@@ -1,5 +1,6 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,12 +12,16 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
     <!-- Styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body class="font-sans antialiased d-flex flex-column min-vh-100">
     <div class="min-h-screen">
         <!-- Navigation -->
@@ -27,58 +32,71 @@
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                
 
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a href="{{ route('about') }}" class="nav-link text-dark">Acerca de Nosotros</a></li>
-                        <li class="nav-item"><a href="{{ route('donar.informativo') }}" class="nav-link">Donar Dispositivo</a></li>
-                        <li class="nav-item"><a href="{{ route('privacy') }}" class="nav-link">Política de Privacidad</a></li>
-                        <li class="nav-item"><a href="{{ route('terms') }}" class="nav-link">Términos y Condiciones</a></li>
-                    </ul>
 
-                    <ul class="navbar-nav ms-3">
-                        @auth
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                                    <i class="fas fa-user-circle fa-2x me-1"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    @if(Auth::user()->role === 'administrador')  
-                                        <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}"><i class="fas fa-cog"></i> Panel de Administración</a></li>
-                                    @else
-                                        <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fas fa-user"></i> Editar Perfil</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('donar.informativo') }}"><i class="fas fa-gift"></i> Donar Dispositivo</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('donaciones.panel') }}"><i class="fas fa-list"></i> Panel de Donaciones</a></li>
-                                    @endif
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li>
-                                        <form action="{{ route('logout') }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="dropdown-item text-danger"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <a href="{{ route('login') }}" class="nav-link"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('register') }}" class="nav-link text-black"><i class="fas fa-user-plus"></i> Registrarse</a>
-                            </li>
-                        @endauth
-                    </ul>
-                
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="{{ route('about') }}" class="nav-link text-dark">Acerca de
+                            Nosotros</a></li>
+                    <li class="nav-item"><a href="{{ route('donar.informativo') }}" class="nav-link">Donar
+                            Dispositivo</a></li>
+                    <li class="nav-item"><a href="{{ route('privacy') }}" class="nav-link">Política de Privacidad</a>
+                    </li>
+                    <li class="nav-item"><a href="{{ route('terms') }}" class="nav-link">Términos y Condiciones</a></li>
+                </ul>
+
+                <ul class="navbar-nav ms-3">
+                    @auth
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
+                                role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle fa-2x me-1"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                @if (Auth::user()->role === 'administrador')
+                                    <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}"><i
+                                                class="fas fa-cog"></i> Panel de Administración</a></li>
+                                @else
+                                    <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fas fa-user"></i>
+                                            Editar Perfil</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('donar.informativo') }}"><i
+                                                class="fas fa-gift"></i> Donar Dispositivo</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-list"></i> Panel de
+                                            Donaciones</a></li>
+                                @endif
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-danger"><i
+                                                class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ route('login') }}" class="nav-link"><i class="fas fa-sign-in-alt"></i> Iniciar
+                                Sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('register') }}" class="nav-link text-black"><i class="fas fa-user-plus"></i>
+                                Registrarse</a>
+                        </li>
+                    @endauth
+                </ul>
+
             </div>
         </nav>
 
 
-        
+
         <main class="py-5 mt-5">
             @yield('content')
         </main>
-        
-        <footer class="bg-green-800 text-white py-4 mt-auto flex-grow-1" >
+
+        <footer class="bg-green-800 text-white py-4 mt-auto flex-grow-1">
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-4 mb-3">
@@ -102,7 +120,7 @@
                     <div class="col-12 col-md-4 mb-3 text-end">
                         <h5>Información Legal</h5>
                         <p>
-                            <a href="{{ route('privacy') }}" class="text-white">Política de privacidad</a> | 
+                            <a href="{{ route('privacy') }}" class="text-white">Política de privacidad</a> |
                             <a href="{{ route('terms') }}" class="text-white">Términos y condiciones</a>
                         </p>
                         <p>&copy; 2025 ECOREBOOT. Todos los derechos reservados.</p>
@@ -114,13 +132,16 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
-            dropdownElementList.map(function (dropdownToggleEl) {
+            dropdownElementList.map(function(dropdownToggleEl) {
                 return new bootstrap.Dropdown(dropdownToggleEl);
             });
         });
     </script>
     @livewireScripts
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
+
 </html>

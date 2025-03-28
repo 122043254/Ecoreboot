@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\About as LivewireAbout;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DonationRequestController;
+
 
 // Ruta principal
 Route::view('/', 'welcome')->name('home');
@@ -30,3 +32,13 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Requiere las rutas de autenticación
 require __DIR__ . '/auth.php';
+
+// // Rutas para donaciones de dispositivos
+// Route::get('/donar-dispositivos', [DonationRequestController::class, 'create'])->name('donar.dispositivos');
+// Route::post('/donar-dispositivos', [DonationRequestController::class, 'store'])->name('donar.dispositivos.store');
+Route::get('/donar-dispositivos', [DonationRequestController::class, 'create'])->name('donar.dispositivos')->defaults('type', 'donar');
+Route::post('/donar-dispositivos', [DonationRequestController::class, 'store'])->name('donar.dispositivos.store');
+
+//Ruta de donativos
+Route::get('/solicitar_donativo', [DonationRequestController::class, 'create'])->name('solicitar_donativo')->defaults('type', 'solicitar');
+Route::post('/solicitar_donativo', [DonationRequestController::class, 'store'])->name('solicitar_donativo.store');
