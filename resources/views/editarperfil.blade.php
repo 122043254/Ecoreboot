@@ -1,110 +1,38 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Perfil</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+@extends('layouts.app')
 
-        .container {
-            background: #D9D9D9;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            width: 400px;
-            text-align: center;
-        }
+@section('content')
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="form-container bg-light p-5 rounded shadow" style="max-width: 500px; width: 100%;">
+            <h2 class="text-center mb-4">EDITAR PERFIL</h2>
+            <form action="guardar_perfil.php" method="POST" enctype="multipart/form-data">
+                <div class="form-group mb-3">
+                    <label class="form-label">Nombre Completo</label>
+                    <input type="text" name="nombre" class="form-control" placeholder="Juan Pérez" required>
+                </div>
 
-        h2 {
-            margin-bottom: 15px;
-            font-size: 22px;
-        }
+                <div class="form-group mb-3">
+                    <label class="form-label">Correo Electrónico</label>
+                    <input type="email" name="correo" class="form-control" placeholder="ejemplo@correo.com" required>
+                </div>
 
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
+                <div class="form-group mb-3">
+                    <label class="form-label">Teléfono</label>
+                    <input type="tel" name="telefono" class="form-control" placeholder="1234567890" pattern="[0-9]{10}" title="Debe ingresar un número de teléfono válido de 10 dígitos">
+                </div>
 
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
+                <div class="form-group mb-3">
+                    <label class="form-label">Nueva Contraseña</label>
+                    <input type="password" name="password" class="form-control" placeholder="Dejar en blanco si no desea cambiar">
+                </div>
 
-        input[type="text"], 
-        input[type="email"], 
-        input[type="password"], 
-        input[type="tel"], 
-        input[type="file"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 10px;
-            border: none;
-            background: #D9F5D3; 
-            color: #333;
-            font-size: 14px;
-        }
+                <div class="form-group mb-4">
+                    <label class="form-label">Foto de Perfil</label>
+                    <input type="file" name="foto" class="form-control" accept="image/*">
+                </div>
 
-        .btn {
-            background-color: #4CAF50; 
-            color: white;
-            padding: 12px;
-            width: 100%;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            background-color: #3d8b40;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <h2>EDITAR PERFIL</h2>
-
-        <form action="guardar_perfil.php" method="POST">
-            <div class="form-group">
-                <label>Nombre Completo</label>
-                <input type="text" name="nombre" placeholder="Juan Pérez" required>
-            </div>
-
-            <div class="form-group">
-                <label>Correo Electrónico</label>
-                <input type="email" name="correo" placeholder="ejemplo@correo.com" required>
-            </div>
-
-            <div class="form-group">
-                <label>Teléfono</label>
-                <input type="tel" name="telefono" placeholder="1234567890">
-            </div>
-
-            <div class="form-group">
-                <label>Nueva Contraseña</label>
-                <input type="password" name="password" placeholder="Dejar en blanco si no desea cambiar">
-            </div>
-
-            <div class="form-group">
-                <label>Foto de Perfil</label>
-                <input type="file" name="foto" accept="image/*">
-            </div>
-
-            <button type="submit" class="btn">ACTUALIZAR</button>
-        </form>
+                <button type="submit" class="btn btn-success w-100">ACTUALIZAR</button>
+            </form>
+        </div>
     </div>
-
-</body>
-</html>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+@endsection

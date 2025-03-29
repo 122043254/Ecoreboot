@@ -1,28 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historial de Dispositivos</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-            body {
-            background-color: #f4f4f4;
-        }
+@extends('layouts.app')
 
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            color: #4CAF50;
-            text-align: center;
-        }
-
-        .nav-tabs .nav-link {
+@section('content')
+<style>
+    .nav-tabs .nav-link {
             background-color: transparent; 
             color: #4CAF50; 
             border-color: transparent; 
@@ -32,31 +12,9 @@
             background-color: #4CAF50; 
             color: white; 
         }
-
-        .table {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .table th, .table td {
-            text-align: center;
-        }
-
-        .table-striped tbody tr:nth-child(odd) {
-            background-color: #f9f9f9;
-        }
-
-        .table-striped tbody tr:nth-child(even) {
-            background-color: #ffffff;
-        }
-    </style>
-
-</head>
-<body>
-
+</style>
 <div class="container mt-5">
-    <h2>Historial de Dispositivos</h2>
+    <h1 class="text-center mb-4 text-success fw-bold h3">Historial de Dispositivos</h1>
 
     <!-- Navegación entre Donaciones y Solicitudes -->
     <ul class="nav nav-tabs" id="historialTabs">
@@ -126,7 +84,6 @@
         </div>
     </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+
+@endsection
